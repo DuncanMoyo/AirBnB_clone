@@ -25,6 +25,7 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, line):
         """EOF command to exit the program with ctrl+D"""
         print()
+        """remember to remove print() if checker says it's wrong"""
         return True
 
     def do_quit(self, line):
@@ -73,6 +74,16 @@ class HBNBCommand(cmd.Cmd):
         """remove the quotations if string inputted has them"""
         args = self.remove_quotations(args)
         print(instances_dict[args[0] + '.' + args[1]])
+
+    def counter(self, cls_name):
+        """Count command: counts the number of instances based on the class"""
+
+        number_of_instances = 0
+        instances_dict = storage.all()
+        for inst in instances_dict.values():
+            if inst.__class__.__name__ == cls_name:
+                number_of_instances += 1
+        print(number_of_instances)
 
     def do_destroy(self, line):
         """Delete command: deletes an instance based on the class name and id
